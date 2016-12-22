@@ -54,14 +54,19 @@ ll gcd(ll a, ll b) ////                 O(log(a+b))
     return gcd(b,a%b);
 }
 ////////////////////////////////////////////////////////////////////////////////////CODE BEGINS/////////////////////////////////////////////////////////
-
+/* this struct represents a linked list
+* the num represents the data stored in the linked list and
+* the *next pointer is the pointer to the next node in the linked list
+*/
 struct node {
     int num;
     node *next;
 };
 
+// initialising head to new node
 node *head = new node();
 
+// search() searches whether there is the element present in the linked list or not
 bool search(int n) {
     node *tmpHead = head;
     while(tmpHead != NULL && tmpHead->num != n) {
@@ -73,17 +78,21 @@ bool search(int n) {
     return true;
 }
 
+// to insert a element in the linked list
 void insert(int x) {
     node *tmpHead = head;
     while(tmpHead->next != NULL) {
         tmpHead = tmpHead->next;
     }
+    // now we have reached at the end of the linked list
     node *tmp = new node();
     tmp->num = x;
     tmp->next = NULL;
+    //point the previous end of linked list to current node
     tmpHead->next = tmp;
 }
 
+// deletes an element from the linked list
 void del(int n) {
     node *tmpHead = head;
     while(tmpHead->next != NULL && tmpHead->next->num != n) {
@@ -93,6 +102,7 @@ void del(int n) {
         cout << "element not found";
         return;
     }
+    // point the previous node to next of current node(node which we are suppose to delete)
     node *temp = tmpHead->next;
     tmpHead->next = temp->next;
     delete(temp);
